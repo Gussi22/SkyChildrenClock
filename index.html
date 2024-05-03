@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <title>Dynamic Clock</title>
+  </head>
+  <body>
+    <div class="icons">
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+    </div>
+    <section>
+      <div class="container">
+        <div class="name">
+          <span class="name">Gussi / Puffy / Michi / Mira</span>
+          <div class="time">
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num hour_num ph_hour">08</span>
+                <span class="text">Hours</span>
+              </div>
+              <span class="colon">:</span>
+            </div>
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num min_num ph_min">45</span>
+                <span class="text">Minutes</span>
+              </div>
+              <span class="colon">:</span>
+            </div>
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num sec_num ph_sec">06</span>
+                <span class="text">Seconds</span>
+              </div>
+              <span class="am_pm ph_am_pm">AM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="name">
+          <span class="name">Ella</span>
+          <div class="time">
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num hour_num cet_hour">08</span>
+                <span class="text">Hours</span>
+              </div>
+              <span class="colon">:</span>
+            </div>
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num min_num cet_min">45</span>
+                <span class="text">Minutes</span>
+              </div>
+              <span class="colon">:</span>
+            </div>
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num sec_num cet_sec">06</span>
+                <span class="text">Seconds</span>
+              </div>
+              <span class="am_pm cet_am_pm">AM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let section = document.querySelector("body"),
+        icons = document.querySelector(".icons");
+
+      icons.onclick = () => {
+        section.classList.toggle("dark");
+      };
+
+      setInterval(() => {
+        let date = new Date(),
+          hour = date.getUTCHours(),
+          min = date.getUTCMinutes(),
+          sec = date.getUTCSeconds();
+
+        let d;
+        d = hour < 12 ? "AM" : "PM";
+        hour = hour == 0 ? (hour = 12) : hour;
+        hour = hour < 10 ? "0" + hour : hour;
+        min = min < 10 ? "0" + min : min;
+        sec = sec < 10 ? "0" + sec : sec;
+
+        document.querySelector(".ph_hour").innerText = hour + 8 - 12;
+        document.querySelector(".ph_min").innerText = min;
+        document.querySelector(".ph_sec").innerText = sec;
+        document.querySelector(".ph_am_pm").innerText = d;
+
+        document.querySelector(".cet_hour").innerText = hour + 2 - 12;
+        document.querySelector(".cet_min").innerText = min;
+        document.querySelector(".cet_sec").innerText = sec;
+        document.querySelector(".cet_am_pm").innerText = d;
+      }, 1000);
+    </script>
+  </body>
+</html>

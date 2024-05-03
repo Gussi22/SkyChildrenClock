@@ -23,21 +23,21 @@
             <div class="time-colon">
               <div class="time-text">
                 <span class="num hour_num ph_hour">08</span>
-                <span class="text">Hours</span>
+                <span class="text">Hrs</span>
               </div>
               <span class="colon">:</span>
             </div>
             <div class="time-colon">
               <div class="time-text">
                 <span class="num min_num ph_min">45</span>
-                <span class="text">Minutes</span>
+                <span class="text">Min</span>
               </div>
               <span class="colon">:</span>
             </div>
             <div class="time-colon">
               <div class="time-text">
                 <span class="num sec_num ph_sec">06</span>
-                <span class="text">Seconds</span>
+                <span class="text">Sec</span>
               </div>
               <span class="am_pm ph_am_pm">AM</span>
             </div>
@@ -53,23 +53,53 @@
             <div class="time-colon">
               <div class="time-text">
                 <span class="num hour_num cet_hour">08</span>
-                <span class="text">Hours</span>
+                <span class="text">Hrs</span>
               </div>
               <span class="colon">:</span>
             </div>
             <div class="time-colon">
               <div class="time-text">
                 <span class="num min_num cet_min">45</span>
-                <span class="text">Minutes</span>
+                <span class="text">Min</span>
               </div>
               <span class="colon">:</span>
             </div>
             <div class="time-colon">
               <div class="time-text">
                 <span class="num sec_num cet_sec">06</span>
-                <span class="text">Seconds</span>
+                <span class="text">Sec</span>
               </div>
               <span class="am_pm cet_am_pm">AM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="name">
+          <span class="name">Karby</span>
+          <div class="time">
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num hour_num cst_hour">08</span>
+                <span class="text">Hrs</span>
+              </div>
+              <span class="colon">:</span>
+            </div>
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num min_num cst_min">45</span>
+                <span class="text">Min</span>
+              </div>
+              <span class="colon">:</span>
+            </div>
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num sec_num cst_sec">06</span>
+                <span class="text">Sec</span>
+              </div>
+              <span class="am_pm cst_am_pm">AM</span>
             </div>
           </div>
         </div>
@@ -101,6 +131,11 @@
         document.querySelector(".ph_min").innerText = min;
         document.querySelector(".ph_sec").innerText = sec;
         document.querySelector(".ph_am_pm").innerText = d;
+
+        document.querySelector(".cst_hour").innerText = hour + 8 - 12;
+        document.querySelector(".cst_min").innerText = min;
+        document.querySelector(".cst_sec").innerText = sec;
+        document.querySelector(".cst_am_pm").innerText = d;
 
         document.querySelector(".cet_hour").innerText = hour + 2 - 12;
         document.querySelector(".cet_min").innerText = min;

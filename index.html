@@ -18,7 +18,10 @@
     <section>
       <div class="container">
         <div class="name">
-          <span class="name">Gussi | Puffy | Michi | Mira</span>
+          <span class="name"
+            >Gussi | Puffy | Michi <br />
+            Mira | Karby | Wings</span
+          >
           <div class="time">
             <div class="time-colon">
               <div class="time-text">
@@ -40,6 +43,36 @@
                 <span class="text">Sec</span>
               </div>
               <span class="am_pm ph_am_pm">AM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="name">
+          <span class="name">Nara Mai</span>
+          <div class="time">
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num hour_num brt_hour">08</span>
+                <span class="text">Hrs</span>
+              </div>
+              <span class="colon">:</span>
+            </div>
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num min_num brt_min">45</span>
+                <span class="text">Min</span>
+              </div>
+              <span class="colon">:</span>
+            </div>
+            <div class="time-colon">
+              <div class="time-text">
+                <span class="num sec_num brt_sec">06</span>
+                <span class="text">Sec</span>
+              </div>
+              <span class="am_pm brt_am_pm">AM</span>
             </div>
           </div>
         </div>
@@ -75,36 +108,6 @@
         </div>
       </div>
     </section>
-    <section>
-      <div class="container">
-        <div class="name">
-          <span class="name">Karby</span>
-          <div class="time">
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num hour_num cst_hour">08</span>
-                <span class="text">Hrs</span>
-              </div>
-              <span class="colon">:</span>
-            </div>
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num min_num cst_min">45</span>
-                <span class="text">Min</span>
-              </div>
-              <span class="colon">:</span>
-            </div>
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num sec_num cst_sec">06</span>
-                <span class="text">Sec</span>
-              </div>
-              <span class="am_pm cst_am_pm">AM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <script>
       let section = document.querySelector("body"),
@@ -127,20 +130,20 @@
         min = min < 10 ? "0" + min : min;
         sec = sec < 10 ? "0" + sec : sec;
 
-        document.querySelector(".ph_hour").innerText = hour + 8 - 12;
+        document.querySelector(".ph_hour").innerText = hour + 8;
         document.querySelector(".ph_min").innerText = min;
         document.querySelector(".ph_sec").innerText = sec;
         document.querySelector(".ph_am_pm").innerText = d;
 
-        document.querySelector(".cst_hour").innerText = hour + 8 - 12;
-        document.querySelector(".cst_min").innerText = min;
-        document.querySelector(".cst_sec").innerText = sec;
-        document.querySelector(".cst_am_pm").innerText = d;
-
-        document.querySelector(".cet_hour").innerText = hour + 2 - 12;
+        document.querySelector(".cet_hour").innerText = hour + 2;
         document.querySelector(".cet_min").innerText = min;
         document.querySelector(".cet_sec").innerText = sec;
         document.querySelector(".cet_am_pm").innerText = d;
+
+        document.querySelector(".brt_hour").innerText = hour - 3;
+        document.querySelector(".brt_min").innerText = min;
+        document.querySelector(".brt_sec").innerText = sec;
+        document.querySelector(".brt_am_pm").innerText = d;
       }, 1000);
     </script>
   </body>

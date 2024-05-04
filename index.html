@@ -136,6 +136,7 @@
 
         // Adjust hour for each time zone and calculate AM/PM based on adjusted value
         let phHour = (hour + 8) % 24;
+        phHour = phHour < 0 ? phHour + 24 : phHour;
         let phAmPm = phHour < 12 ? "AM" : "PM";
         document.querySelector(".ph_hour").innerText =
           phHour % 12 < 10 ? "0" + (phHour % 12) || 12 : phHour % 12 || 12; // Display in 12-hour format
@@ -144,6 +145,7 @@
         document.querySelector(".ph_am_pm").innerText = phAmPm;
 
         let brtHour = (hour - 3) % 24;
+        brtHour = brtHour < 0 ? brtHour + 24 : brtHour;
         let brtAmPm = brtHour < 12 ? "AM" : "PM";
         document.querySelector(".brt_hour").innerText =
           brtHour % 12 < 10 ? "0" + (brtHour % 12) || 12 : brtHour % 12 || 12; // Display in 12-hour format
@@ -152,6 +154,7 @@
         document.querySelector(".brt_am_pm").innerText = brtAmPm;
 
         let cetHour = (hour + 2) % 24;
+        cetHour = cetHour < 0 ? cetHour + 24 : cetHour;
         let cetAmPm = cetHour < 12 ? "AM" : "PM";
         document.querySelector(".cet_hour").innerText =
           cetHour % 12 < 10 ? "0" + (cetHour % 12) || 12 : cetHour % 12 || 12; // Display in 12-hour format

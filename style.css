@@ -5,7 +5,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Orbitron", sans-serif;
-  transition: all 0.4s ease;
 }
 
 body {
@@ -19,7 +18,6 @@ body {
 }
 
 section {
-  min-height: 50vh;
   width: 100vw;
   display: flex;
   align-items: center;
@@ -50,15 +48,16 @@ body.dark .container {
 
 .icons i {
   position: absolute;
-  right: 17px;
-  top: 17px;
+  right: 5px;
+  top: 5px;
   height: 30px;
-  background: #24292d;
+  background: #323840;
   color: #fff;
   text-align: center;
   line-height: 30px;
   border-radius: 50%;
-  font-size: 14px;
+  font-size: 15px;
+  padding: 0 7.5px 0 7.5px;
   cursor: pointer;
 }
 
@@ -72,10 +71,16 @@ body.dark .container .icons i {
   pointer-events: none;
 }
 
-body.dark .container .icons i.fa-sun {
+.icons i.fa-moon {
+  opacity: 1;
+}
+
+body.dark i.fa-sun {
   opacity: 1;
   pointer-events: auto;
   font-size: 16px;
+  background: #f0f8ff;
+  color: #323840;
 }
 
 section .container .time {

@@ -13,7 +13,7 @@
     />
     <title>Dynamic Clock</title>
   </head>
-  <body>
+  <body class="dark">
     <div class="icons">
       <i class="fas fa-moon"></i>
       <i class="fas fa-sun"></i>
@@ -147,7 +147,13 @@
         locAmPm = locHour < 12 ? "AM" : "PM";
 
         document.querySelector(`.${loc}_hour`).innerText =
-          locHour % 12 < 10 ? "0" + (locHour % 12) || 12 : locHour % 12 || 12;
+          locHour % 12 == 0
+            ? locAmPm == "AM"
+              ? "00"
+              : 12
+            : locHour % 12 < 10
+            ? "0" + (locHour % 12)
+            : locHour % 12;
         document.querySelector(`.${loc}_min`).innerText = min;
         document.querySelector(`.${loc}_sec`).innerText = sec;
         document.querySelector(`.${loc}_am_pm`).innerText = locAmPm;

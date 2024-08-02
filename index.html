@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv='cache-control' content='no-cache'> 
-    <meta http-equiv='expires' content='0'> 
-    <meta http-equiv='pragma' content='no-cache'>
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="pragma" content="no-cache" />
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -119,6 +119,40 @@
     </section>
 
     <script>
+      function setTime(loc) {
+        let date = new Date(),
+          hour = date.getUTCHours(),
+          min = date.getUTCMinutes(),
+          sec = date.getUTCSeconds();
+
+        // Calculate AM/PM based on original UTC hour
+        min = min < 10 ? "0" + min : min;
+        sec = sec < 10 ? "0" + sec : sec;
+
+        let locHour;
+        let locAmPm;
+
+        switch (loc) {
+          case "ph":
+            locHour = hour + 8;
+            break;
+          case "brt":
+            locHour = hour - 3;
+            break;
+          case "cet":
+            locHour = hour + 2;
+            break;
+        }
+        locHour = locHour % 24 < 0 ? locHour + 24 : locHour;
+        locAmPm = locHour < 12 ? "AM" : "PM";
+
+        document.querySelector(`.${loc}_hour`).innerText =
+          locHour % 12 < 10 ? "0" + (locHour % 12) || 12 : locHour % 12 || 12;
+        document.querySelector(`.${loc}_min`).innerText = min;
+        document.querySelector(`.${loc}_sec`).innerText = sec;
+        document.querySelector(`.${loc}_am_pm`).innerText = locAmPm;
+      }
+
       let section = document.querySelector("body"),
         icons = document.querySelector(".icons");
 
@@ -127,43 +161,9 @@
       };
 
       setInterval(() => {
-        let date = new Date(),
-          hour = date.getUTCHours(),
-          min = date.getUTCMinutes(),
-          sec = date.getUTCSeconds();
-
-        // Calculate AM/PM based on original UTC hour
-        let d = hour < 12 ? "AM" : "PM";
-        min = min < 10 ? "0" + min : min;
-        sec = sec < 10 ? "0" + sec : sec;
-
-        // Adjust hour for each time zone and calculate AM/PM based on adjusted value
-        let phHour = (hour + 8) % 24;
-        phHour = phHour < 0 ? phHour + 24 : phHour;
-        let phAmPm = phHour < 12 ? "AM" : "PM";
-        document.querySelector(".ph_hour").innerText =
-          phHour % 12 < 10 ? "0" + (phHour % 12) || 12 : phHour % 12 || 12; // Display in 12-hour format
-        document.querySelector(".ph_min").innerText = min;
-        document.querySelector(".ph_sec").innerText = sec;
-        document.querySelector(".ph_am_pm").innerText = phAmPm;
-
-        let brtHour = (hour - 3) % 24;
-        brtHour = brtHour < 0 ? brtHour + 24 : brtHour;
-        let brtAmPm = brtHour < 12 ? "AM" : "PM";
-        document.querySelector(".brt_hour").innerText =
-          brtHour % 12 < 10 ? "0" + (brtHour % 12) || 12 : brtHour % 12 || 12; // Display in 12-hour format
-        document.querySelector(".brt_min").innerText = min;
-        document.querySelector(".brt_sec").innerText = sec;
-        document.querySelector(".brt_am_pm").innerText = brtAmPm;
-
-        let cetHour = (hour + 2) % 24;
-        cetHour = cetHour < 0 ? cetHour + 24 : cetHour;
-        let cetAmPm = cetHour < 12 ? "AM" : "PM";
-        document.querySelector(".cet_hour").innerText =
-          cetHour % 12 < 10 ? "0" + (cetHour % 12) || 12 : cetHour % 12 || 12; // Display in 12-hour format
-        document.querySelector(".cet_min").innerText = min;
-        document.querySelector(".cet_sec").innerText = sec;
-        document.querySelector(".cet_am_pm").innerText = cetAmPm;
+        setTime("ph");
+        setTime("brt");
+        setTime("cet");
       }, 1000);
     </script>
   </body>

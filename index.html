@@ -18,146 +18,100 @@
       <i class="fas fa-moon"></i>
       <i class="fas fa-sun"></i>
     </div>
-    <section>
-      <div class="container">
-        <div class="name">
-          <span class="name"
-            >Gussi | Puffy | Michi <br />
-            Mira | Karby | Wings</span
-          >
-          <br />
-          <span>(GMT +8)</span>
-          <div class="time">
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num hour_num ph_hour">08</span>
-                <span class="text">Hrs</span>
-              </div>
-              <span class="colon">:</span>
-            </div>
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num min_num ph_min">45</span>
-                <span class="text">Min</span>
-              </div>
-              <span class="colon">:</span>
-            </div>
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num sec_num ph_sec">06</span>
-                <span class="text">Sec</span>
-              </div>
-              <span class="am_pm ph_am_pm">AM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="name">
-          <span class="name">Nara Mai</span>
-          <br />
-          <span>(GMT -3)</span>
-          <div class="time">
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num hour_num brt_hour">08</span>
-                <span class="text">Hrs</span>
-              </div>
-              <span class="colon">:</span>
-            </div>
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num min_num brt_min">45</span>
-                <span class="text">Min</span>
-              </div>
-              <span class="colon">:</span>
-            </div>
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num sec_num brt_sec">06</span>
-                <span class="text">Sec</span>
-              </div>
-              <span class="am_pm brt_am_pm">AM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="name">
-          <span class="name">Ella</span>
-          <br />
-          <span>(GMT +2)</span>
-          <div class="time">
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num hour_num cet_hour">08</span>
-                <span class="text">Hrs</span>
-              </div>
-              <span class="colon">:</span>
-            </div>
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num min_num cet_min">45</span>
-                <span class="text">Min</span>
-              </div>
-              <span class="colon">:</span>
-            </div>
-            <div class="time-colon">
-              <div class="time-text">
-                <span class="num sec_num cet_sec">06</span>
-                <span class="text">Sec</span>
-              </div>
-              <span class="am_pm cet_am_pm">AM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <script>
-      function setTime(loc) {
-        let date = new Date(),
-          hour = date.getUTCHours(),
-          min = date.getUTCMinutes(),
-          sec = date.getUTCSeconds();
-
-        // Calculate AM/PM based on original UTC hour
-        min = min < 10 ? "0" + min : min;
-        sec = sec < 10 ? "0" + sec : sec;
-
-        let locHour;
-        let locAmPm;
-
-        switch (loc) {
-          case "ph":
-            locHour = hour + 8;
-            break;
-          case "brt":
-            locHour = hour - 3;
-            break;
-          case "cet":
-            locHour = hour + 2;
-            break;
-        }
-        locHour = locHour % 24 < 0 ? locHour + 24 : locHour;
-        locAmPm = locHour < 12 ? "AM" : "PM";
-
-        document.querySelector(`.${loc}_hour`).innerText =
-          locHour % 12 == 0
-            ? locAmPm == "AM"
-              ? "00"
-              : 12
-            : locHour % 12 < 10
-            ? "0" + (locHour % 12)
-            : locHour % 12;
-        document.querySelector(`.${loc}_min`).innerText = min;
-        document.querySelector(`.${loc}_sec`).innerText = sec;
-        document.querySelector(`.${loc}_am_pm`).innerText = locAmPm;
+      function addSection(name, timezone, loc) {
+        const section = document.createElement("section");
+        section.className = `section ${loc}`;
+        section.innerHTML = `
+        <div class="container">
+          <div class="name">
+            <span class="name">${name}</span>
+            <br />
+            <span>(${timezone})</span>
+            <div class="time">
+              <div class="time-colon">
+                <div class="time-text">
+                  <span class="num hour_num ${loc}_hour">00</span>
+                  <span class="text">Hrs</span>
+                </div>
+                <span class="colon">:</span>
+              </div>
+              <div class="time-colon">
+                <div class="time-text">
+                  <span class="num min_num ${loc}_min">00</span>
+                  <span class="text">Min</span>
+                </div>
+                <span class="colon">:</span>
+              </div>
+              <div class="time-colon">
+                <div class="time-text">
+                  <span class="num sec_num ${loc}_sec">00</span>
+                  <span class="text">Sec</span>
+                </div>
+                <span class="am_pm ${loc}_am_pm">AM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+        document.body.appendChild(section);
       }
+
+      function setTime(loc) {
+        const elements = document.querySelectorAll(`.${loc}`);
+        elements.forEach((element) => {
+          let now = new Date();
+          let hours = now.getUTCHours();
+          let minutes = now.getUTCMinutes();
+          let seconds = now.getUTCSeconds();
+          let ampm = hours >= 12 ? "PM" : "AM";
+
+          switch (loc) {
+            case "pht":
+              hours += 8;
+              break;
+            case "brt":
+              hours -= 3;
+              break;
+            case "cet":
+              hours += 2;
+              break;
+            default:
+              break;
+          }
+
+          element.querySelector(`.${loc}_hour`).textContent = String(
+            hours % 12 == 0
+              ? ampm == "AM"
+                ? "00"
+                : 12
+              : hours % 12 < 10
+              ? "0" + (hours % 12)
+              : hours % 12
+          ).padStart(2, "0");
+          element.querySelector(`.${loc}_min`).textContent = String(
+            minutes
+          ).padStart(2, "0");
+          element.querySelector(`.${loc}_sec`).textContent = String(
+            seconds
+          ).padStart(2, "0");
+          element.querySelector(`.${loc}_am_pm`).textContent = ampm;
+        });
+      }
+
+      const locations = [
+        {
+          name: "Gussi | Puffy | Michi <br> Mira | Wings | Karby",
+          timezone: "UTC +8",
+          loc: "pht",
+        },
+        { name: "Nara Mai", timezone: "UTC -3", loc: "brt" },
+        { name: "Ella", timezone: "UTC +2", loc: "cet" },
+      ];
+
+      locations.forEach((location) => {
+        addSection(location.name, location.timezone, location.loc);
+      });
 
       let section = document.querySelector("body"),
         icons = document.querySelector(".icons");
@@ -167,9 +121,9 @@
       };
 
       setInterval(() => {
-        setTime("ph");
-        setTime("brt");
-        setTime("cet");
+        locations.forEach((location) => {
+          setTime(location.loc);
+        });
       }, 1000);
     </script>
   </body>
